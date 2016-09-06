@@ -12,23 +12,22 @@ function Chick_in(){
             },
             function(input){
                 var data = input.split(',');
-                var result = "<strong>系統訊息：</strong>";
-                result += data[1];
-                var result_data = $("<dir></dir>").html(result);
-                console.log(data);
-                if(data[0]=='0'){
-                    result_data.addClass("alert alert-danger");
-                } else if(data[0] == '1'){
-                    result_data.addClass("alert alert-success");
-                }else{
-                    result_data.addClass("alert alert-info");
-                }
+                display_message(data);
 
-                $("#result").after(result_data);
+                if(data[0] == '2' && confirm("請問需要新增簽到日期表格嗎?") == true){
+                    $.get("https://script.google.com/macros/s/AKfycbyiw2c1VtSMXY7ftGX8vPrYEoW97a3RoJKGaavA1Our_bzxoTBS/exec",{
+                        "today":today
+                        },
+                    function(input){
+                        var data = input.split(',');
+                        display_message(data);
+                    });
+                }
 
                 $('#checkInNumber').attr('disabled',false);    
                 $('#checkInNumber').val("");
-                $('#checkInNumber').focus();        
+                $('#checkInNumber').focus();
+
             });
 }
 
@@ -37,6 +36,22 @@ $('#checkInNumber').keydown(function(event){
         Chick_in();
     }
 });
+
+
+function display_message(data){
+    var result = "<strong>系統訊息：</strong>";
+    result += data[1];
+    var result_data = $("<dir></dir>").html(result);
+    console.log(data);
+    if(data[0]=='0'){//成功(綠色訊息)
+        result_data.addClass("alert alert-success");
+    } else if(data[0] == '1'){ //通知(藍色訊息)
+        result_data.addClass("alert alert-info");
+    }else{//警告(紅色訊息)
+        result_data.addClass("alert alert-danger");
+    }
+    $("#result").after(result_data);
+}
 
 
 // 讀取所有報到資訊
@@ -106,6 +121,7 @@ function get_today(d){
     var month = d.getMonth()+1; 
     return year + '/' + (month<10 ? '0' : '') + month + '/' + (day<10 ? '0' : '') + day;
 }
+
 function get_time(d){
     var hour = d.getHours();
     var minute = d.getMinutes();
