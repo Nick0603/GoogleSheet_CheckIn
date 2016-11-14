@@ -91,15 +91,20 @@ function update_display_data(){
     for(i = 1;i<row;i++){
         var body_item = "";
         for(j=0;j<col;j++){
-            body_item += "<td>";
-            body_item += data[i*col+j];
-            body_item += "</td>";
+            if( data[i*col+j] == '已報到'){
+                className = 'alert alert-success';
+            }
+            else if (data[i*col+j] == '未報到') {
+                className = 'alert alert-danger';
+            }else{
+                className = '';
+            }
+            body_item += "<td class = '" +className + "'>" + data[i*col+j] + "</td>";
         }
         var body_data = $("<tr></tr>").html(body_item); 
         $('#table_body').append(body_data);
     }
 }
-
 
 //  時間更新   取id = now_time
 var d = new Date();
