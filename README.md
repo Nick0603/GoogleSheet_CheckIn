@@ -6,4 +6,4 @@
 ** 可由此觀看有哪些卡號可以簽到(未加密 => 不太清楚加密方式..)
 ## 功能說明
 * [Google Sheet API](https://developers.google.com/sheets/api/)
-* 此專案 Google 試算表[連結] (https://docs.google.com/spreadsheets/d/1l0xavBL8wbBJJ5f2CNAhN_e60ijrBz3YYJHcm9vBxYA/edit?usp=sharing)
+* 此專案 Google 試算表[連結](https://docs.google.com/spreadsheets/d/1l0xavBL8wbBJJ5f2CNAhN_e60ijrBz3YYJHcm9vBxYA/edit?usp=sharing)
